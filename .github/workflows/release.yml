@@ -1,0 +1,74 @@
+name: Pack files and release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout (full history for changelog)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Install FlexCli
+        run: npm install -g @eniac/flexcli
+
+      - name: Build Plugin
+        run: npm run build
+
+      - name: Pack Plugin
+        run: npm run plugin:pack
+
+      - name: Generate changelog from conventional commits
+        id: changelog
+        shell: bash
+        run: |
+          set -e
+          PREV_TAG=$(git tag --sort=-v:refname --list 'v*' | grep -v "^${GITHUB_REF_NAME}$" | head -n 1 || true)
+          if [ -n "$PREV_TAG" ]; then
+            RANGE="${PREV_TAG}..HEAD"
+          else
+            RANGE="HEAD"
+          fi
+          echo "Commit range: $RANGE"
+          {
+            echo "## What's Changed"
+            echo ""
+            print_section() {
+              local TYPE="$1"
+              local TITLE="$2"
+              local COMMITS
+              COMMITS=$(git log --pretty=format:"%s" "$RANGE" 2>/dev/null | grep -E "^${TYPE}(\(.+\))?(!)?:" || true)
+              if [ -n "$COMMITS" ]; then
+                echo "### $TITLE"
+                echo "$COMMITS" | sed -E "s/^${TYPE}(\(([^)]+)\))?(!)?:[[:space:]]*/- \2: /" | sed -E "s/^- :[[:space:]]*/- /"
+                echo ""
+              fi
+            }
+            print_section "feat"     "Features"
+            print_section "fix"      "Bug Fixes"
+            print_section "perf"     "Performance"
+            print_section "refactor" "Refactor"
+            print_section "docs"     "Documentation"
+          } > /tmp/CHANGELOG.md
+          cat /tmp/CHANGELOG.md
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: com.dylanL.maccontrol.flexplugin
+          body_path: /tmp/CHANGELOG.md

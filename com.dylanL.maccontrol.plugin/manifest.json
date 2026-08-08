@@ -1,0 +1,737 @@
+{
+  "name": "macOS Control Center",
+  "uuid": "com.dylanL.maccontrol",
+  "version": "1.0.0",
+  "author": "OMP",
+  "entry": "backend/plugin.cjs",
+  "description": "Mac system monitoring and control center for Flexbar",
+  "configPage": "",
+  "platform": [
+    "mac"
+  ],
+  "keyLibrary": {
+    "title": "macOS Control Center",
+    "style": {
+      "icon": "mdi mdi-monitor"
+    },
+    "children": [
+      {
+        "title": "$Folder.Title",
+        "tip": "$Folder.Tip",
+        "cid": "com.dylanL.maccontrol.folder",
+        "style": {
+          "icon": "mdi mdi-tune-vertical",
+          "width": 240,
+          "bgColor": "#1C1C1E",
+          "fgColor": "#ffffff",
+          "fontSize": 12
+        },
+        "data": {},
+        "children": [
+          {
+            "title": "$Monitor.Title",
+            "tip": "$Monitor.Tip",
+            "cid": "com.eniac.navigation.page",
+            "style": {
+              "icon": "mdi mdi-chart-line",
+              "width": 240,
+              "bgColor": "#1C1C1E",
+              "fgColor": "#ffffff",
+              "fontSize": 12
+            },
+            "data": {
+              "path": "",
+              "win": []
+            },
+            "children": [
+              {
+                "title": "$Overview.Title",
+                "tip": "$Overview.Tip",
+                "cid": "com.dylanL.maccontrol.overview",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-view-dashboard-outline",
+                  "width": 600,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              },
+              {
+                "title": "$CPU.Title",
+                "tip": "$CPU.Tip",
+                "cid": "com.dylanL.maccontrol.cpu",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ],
+                  "clickable": false,
+                  "sendKey": false
+                },
+                "style": {
+                  "icon": "mdi mdi-chart-line",
+                  "width": 240,
+                  "bgColor": "#000000",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12,
+                  "showIcon": false,
+                  "showTitle": false,
+                  "borderStyle": "none"
+                },
+                "data": {},
+                "flags": [
+                  "disable-fg",
+                  "disable-icon-sel",
+                  "disable-bg-styles"
+                ]
+              },
+              {
+                "title": "$Memory.Title",
+                "tip": "$Memory.Tip",
+                "cid": "com.dylanL.maccontrol.memory",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ],
+                  "clickable": false,
+                  "sendKey": false
+                },
+                "style": {
+                  "icon": "mdi mdi-chart-line",
+                  "width": 240,
+                  "bgColor": "#000000",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12,
+                  "showIcon": false,
+                  "showTitle": false,
+                  "borderStyle": "none"
+                },
+                "data": {},
+                "flags": [
+                  "disable-fg",
+                  "disable-icon-sel",
+                  "disable-bg-styles"
+                ]
+              },
+              {
+                "title": "$Disk.Title",
+                "tip": "$Disk.Tip",
+                "cid": "com.dylanL.maccontrol.disk",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ],
+                  "clickable": false,
+                  "sendKey": false
+                },
+                "style": {
+                  "icon": "mdi mdi-chart-line",
+                  "width": 240,
+                  "bgColor": "#000000",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12,
+                  "showIcon": false,
+                  "showTitle": false,
+                  "borderStyle": "none"
+                },
+                "data": {},
+                "flags": [
+                  "disable-fg",
+                  "disable-icon-sel",
+                  "disable-bg-styles"
+                ]
+              },
+              {
+                "title": "$Network.Title",
+                "tip": "$Network.Tip",
+                "cid": "com.dylanL.maccontrol.network",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ],
+                  "clickable": false,
+                  "sendKey": false
+                },
+                "style": {
+                  "icon": "mdi mdi-chart-line",
+                  "width": 240,
+                  "bgColor": "#000000",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12,
+                  "showIcon": false,
+                  "showTitle": false,
+                  "borderStyle": "none"
+                },
+                "data": {},
+                "flags": [
+                  "disable-fg",
+                  "disable-icon-sel",
+                  "disable-bg-styles"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "$Power.Title",
+            "tip": "$Power.Tip",
+            "cid": "com.eniac.navigation.page",
+            "style": {
+              "icon": "mdi mdi-power-plug",
+              "width": 240,
+              "bgColor": "#1C1C1E",
+              "fgColor": "#ffffff",
+              "fontSize": 12
+            },
+            "data": {
+              "path": "",
+              "win": []
+            },
+            "children": [
+              {
+                "title": "$Sleep.Title",
+                "tip": "$Sleep.Tip",
+                "cid": "com.dylanL.maccontrol.sleep",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-sleep",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              },
+              {
+                "title": "$Lock.Title",
+                "tip": "$Lock.Tip",
+                "cid": "com.dylanL.maccontrol.lock",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-lock",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              },
+              {
+                "title": "$Shutdown.Title",
+                "tip": "$Shutdown.Tip",
+                "cid": "com.dylanL.maccontrol.shutdown",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-power",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              },
+              {
+                "title": "$Restart.Title",
+                "tip": "$Restart.Tip",
+                "cid": "com.dylanL.maccontrol.restart",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-restart",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              },
+              {
+                "title": "$Caffeinate.Title",
+                "tip": "$Caffeinate.Tip",
+                "cid": "com.dylanL.maccontrol.caffeinate",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-coffee",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              }
+            ]
+          },
+          {
+            "title": "$Toggles.Title",
+            "tip": "$Toggles.Tip",
+            "cid": "com.eniac.navigation.page",
+            "style": {
+              "icon": "mdi mdi-toggle-switch",
+              "width": 240,
+              "bgColor": "#1C1C1E",
+              "fgColor": "#ffffff",
+              "fontSize": 12
+            },
+            "data": {
+              "path": "",
+              "win": []
+            },
+            "children": [
+              {
+                "title": "$DarkMode.Title",
+                "tip": "$DarkMode.Tip",
+                "cid": "com.dylanL.maccontrol.darkmode",
+                "config": {
+                  "keyType": "multiState",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-weather-night",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12,
+                  "multiStyle": [
+                    {
+                      "icon": "mdi mdi-weather-sunny",
+                      "iconSize": 30,
+                      "showTitle": false,
+                      "bgColor": "#2C2C2E",
+                      "fgColor": "#8E8E93",
+                      "borderStyle": "none"
+                    },
+                    {
+                      "icon": "mdi mdi-weather-night",
+                      "iconSize": 30,
+                      "showTitle": false,
+                      "bgColor": "#0A84FF",
+                      "fgColor": "#FFFFFF",
+                      "borderStyle": "none"
+                    }
+                  ]
+                },
+                "data": {
+                  "states": [
+                    "Off",
+                    "On"
+                  ]
+                }
+              },
+              {
+                "title": "$WiFi.Title",
+                "tip": "$WiFi.Tip",
+                "cid": "com.dylanL.maccontrol.wifi",
+                "config": {
+                  "keyType": "multiState",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-wifi",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12,
+                  "multiStyle": [
+                    {
+                      "icon": "mdi mdi-wifi-off",
+                      "iconSize": 30,
+                      "showTitle": false,
+                      "bgColor": "#2C2C2E",
+                      "fgColor": "#8E8E93",
+                      "borderStyle": "none"
+                    },
+                    {
+                      "icon": "mdi mdi-wifi",
+                      "iconSize": 30,
+                      "showTitle": false,
+                      "bgColor": "#0A84FF",
+                      "fgColor": "#FFFFFF",
+                      "borderStyle": "none"
+                    }
+                  ]
+                },
+                "data": {
+                  "states": [
+                    "Off",
+                    "On"
+                  ]
+                }
+              },
+              {
+                "title": "$Stage.Title",
+                "tip": "$Stage.Tip",
+                "cid": "com.dylanL.maccontrol.stage",
+                "config": {
+                  "keyType": "multiState",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-view-parallel-outline",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12,
+                  "multiStyle": [
+                    {
+                      "icon": "mdi mdi-view-parallel-outline",
+                      "iconSize": 30,
+                      "showTitle": false,
+                      "bgColor": "#2C2C2E",
+                      "fgColor": "#8E8E93",
+                      "borderStyle": "none"
+                    },
+                    {
+                      "icon": "mdi mdi-view-parallel",
+                      "iconSize": 30,
+                      "showTitle": false,
+                      "bgColor": "#0A84FF",
+                      "fgColor": "#FFFFFF",
+                      "borderStyle": "none"
+                    }
+                  ]
+                },
+                "data": {
+                  "states": [
+                    "Off",
+                    "On"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "title": "$Actions.Title",
+            "tip": "$Actions.Tip",
+            "cid": "com.eniac.navigation.page",
+            "style": {
+              "icon": "mdi mdi-flash",
+              "width": 240,
+              "bgColor": "#1C1C1E",
+              "fgColor": "#ffffff",
+              "fontSize": 12
+            },
+            "data": {
+              "path": "",
+              "win": []
+            },
+            "children": [
+              {
+                "title": "$Screenshot.Title",
+                "tip": "$Screenshot.Tip",
+                "cid": "com.dylanL.maccontrol.screenshot",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-camera",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              },
+              {
+                "title": "$EmptyTrash.Title",
+                "tip": "$EmptyTrash.Tip",
+                "cid": "com.dylanL.maccontrol.emptytrash",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-trash-can",
+                  "width": 240,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              },
+              {
+                "title": "$SystemInfo.Title",
+                "tip": "$SystemInfo.Tip",
+                "cid": "com.dylanL.maccontrol.systeminfo",
+                "config": {
+                  "keyType": "default",
+                  "platform": [
+                    "mac"
+                  ]
+                },
+                "style": {
+                  "icon": "mdi mdi-information-outline",
+                  "width": 480,
+                  "bgColor": "#1C1C1E",
+                  "fgColor": "#ffffff",
+                  "fontSize": 12
+                },
+                "data": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "$Strip.Title",
+        "tip": "$Strip.Tip",
+        "cid": "com.dylanL.maccontrol.strip",
+        "config": {
+          "keyType": "directDraw",
+          "clickable": true,
+          "platform": [
+            "mac"
+          ]
+        },
+        "style": {
+          "icon": "mdi mdi-view-column",
+          "width": 240
+        },
+        "data": {}
+      }
+    ]
+  },
+  "local": {
+    "en": {
+      "Folder": {
+        "Title": "Mac Control",
+        "Tip": "Mac system monitoring and control"
+      },
+      "Monitor": {
+        "Title": "Monitor",
+        "Tip": "System monitoring dashboard"
+      },
+      "Overview": {
+        "Title": "Overview",
+        "Tip": "System overview dashboard"
+      },
+      "CPU": {
+        "Title": "CPU",
+        "Tip": "CPU usage and load average"
+      },
+      "Memory": {
+        "Title": "Memory",
+        "Tip": "Memory usage and pressure"
+      },
+      "Disk": {
+        "Title": "Disk",
+        "Tip": "Disk space and I/O"
+      },
+      "Network": {
+        "Title": "Network",
+        "Tip": "Network throughput"
+      },
+      "Power": {
+        "Title": "Power",
+        "Tip": "Power control actions"
+      },
+      "Sleep": {
+        "Title": "Sleep",
+        "Tip": "Put system to sleep"
+      },
+      "Lock": {
+        "Title": "Lock",
+        "Tip": "Lock screen"
+      },
+      "Shutdown": {
+        "Title": "Shutdown",
+        "Tip": "Shut down Mac (long press)"
+      },
+      "Restart": {
+        "Title": "Restart",
+        "Tip": "Restart Mac (long press)"
+      },
+      "Caffeinate": {
+        "Title": "Caffeinate",
+        "Tip": "Prevent system sleep"
+      },
+      "Toggles": {
+        "Title": "Toggles",
+        "Tip": "Quick system toggles"
+      },
+      "DarkMode": {
+        "Title": "Dark Mode",
+        "Tip": "Toggle dark mode"
+      },
+      "WiFi": {
+        "Title": "WiFi",
+        "Tip": "Toggle WiFi"
+      },
+      "Stage": {
+        "Title": "Stage Mgr",
+        "Tip": "Toggle Stage Manager"
+      },
+      "Actions": {
+        "Title": "Actions",
+        "Tip": "Quick actions"
+      },
+      "Screenshot": {
+        "Title": "Screenshot",
+        "Tip": "Capture screen"
+      },
+      "EmptyTrash": {
+        "Title": "Empty Trash",
+        "Tip": "Empty trash (long press)"
+      },
+      "SystemInfo": {
+        "Title": "System Info",
+        "Tip": "Show system information"
+      },
+      "Strip": {
+        "Title": "Control Strip",
+        "Tip": "Full-width aggregate control & monitor bar"
+      }
+    },
+    "zh-CN": {
+      "Folder": {
+        "Title": "Mac \u63a7\u5236\u4e2d\u5fc3",
+        "Tip": "Mac \u7cfb\u7edf\u76d1\u63a7\u4e0e\u63a7\u5236"
+      },
+      "Monitor": {
+        "Title": "\u76d1\u63a7",
+        "Tip": "\u7cfb\u7edf\u76d1\u63a7\u4eea\u8868\u76d8"
+      },
+      "Overview": {
+        "Title": "\u6982\u89c8",
+        "Tip": "\u7cfb\u7edf\u6982\u89c8\u4eea\u8868\u76d8"
+      },
+      "CPU": {
+        "Title": "CPU",
+        "Tip": "CPU \u4f7f\u7528\u7387\u4e0e\u8d1f\u8f7d"
+      },
+      "Memory": {
+        "Title": "\u5185\u5b58",
+        "Tip": "\u5185\u5b58\u4f7f\u7528\u4e0e\u538b\u529b"
+      },
+      "Disk": {
+        "Title": "\u78c1\u76d8",
+        "Tip": "\u78c1\u76d8\u7a7a\u95f4\u4e0e I/O"
+      },
+      "Network": {
+        "Title": "\u7f51\u7edc",
+        "Tip": "\u7f51\u7edc\u541e\u5410\u91cf"
+      },
+      "Power": {
+        "Title": "\u7535\u6e90",
+        "Tip": "\u7535\u6e90\u63a7\u5236\u64cd\u4f5c"
+      },
+      "Sleep": {
+        "Title": "\u7761\u7720",
+        "Tip": "\u4f7f\u7cfb\u7edf\u8fdb\u5165\u7761\u7720"
+      },
+      "Lock": {
+        "Title": "\u9501\u5c4f",
+        "Tip": "\u9501\u5b9a\u5c4f\u5e55"
+      },
+      "Shutdown": {
+        "Title": "\u5173\u673a",
+        "Tip": "\u5173\u95ed Mac\uff08\u957f\u6309\u786e\u8ba4\uff09"
+      },
+      "Restart": {
+        "Title": "\u91cd\u542f",
+        "Tip": "\u91cd\u542f Mac\uff08\u957f\u6309\u786e\u8ba4\uff09"
+      },
+      "Caffeinate": {
+        "Title": "\u9632\u4f11\u7720",
+        "Tip": "\u9632\u6b62\u7cfb\u7edf\u7761\u7720"
+      },
+      "Toggles": {
+        "Title": "\u5f00\u5173",
+        "Tip": "\u5feb\u901f\u7cfb\u7edf\u5f00\u5173"
+      },
+      "DarkMode": {
+        "Title": "\u6df1\u8272\u6a21\u5f0f",
+        "Tip": "\u5207\u6362\u6df1\u8272\u6a21\u5f0f"
+      },
+      "WiFi": {
+        "Title": "WiFi",
+        "Tip": "\u5207\u6362 WiFi"
+      },
+      "Stage": {
+        "Title": "Stage Manager",
+        "Tip": "\u5207\u6362 Stage Manager"
+      },
+      "Actions": {
+        "Title": "\u64cd\u4f5c",
+        "Tip": "\u5feb\u6377\u64cd\u4f5c"
+      },
+      "Screenshot": {
+        "Title": "\u622a\u5c4f",
+        "Tip": "\u622a\u53d6\u5c4f\u5e55"
+      },
+      "EmptyTrash": {
+        "Title": "\u6e05\u7a7a\u5e9f\u7eb8\u7bd3",
+        "Tip": "\u6e05\u7a7a\u5e9f\u7eb8\u7bd3\uff08\u957f\u6309\u786e\u8ba4\uff09"
+      },
+      "SystemInfo": {
+        "Title": "\u7cfb\u7edf\u4fe1\u606f",
+        "Tip": "\u663e\u793a\u7cfb\u7edf\u4fe1\u606f"
+      },
+      "Strip": {
+        "Title": "\u63a7\u5236\u6761",
+        "Tip": "\u5168\u5bbd\u805a\u5408\u63a7\u5236\u4e0e\u76d1\u63a7\u6761"
+      }
+    }
+  },
+  "sdk": {
+    "version": "1.0.9"
+  },
+  "software": {
+    "minimumVersion": "2.0.0"
+  },
+  "os": [
+    {
+      "platform": "mac",
+      "minimumVersion": "26.0"
+    }
+  ],
+  "device": [
+    {
+      "name": "flexbar",
+      "version": "1.0.0"
+    }
+  ]
+}
