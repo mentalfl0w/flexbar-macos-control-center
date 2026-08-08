@@ -64,6 +64,14 @@ jobs:
             print_section "perf"     "Performance"
             print_section "refactor" "Refactor"
             print_section "docs"     "Documentation"
+            print_section "chore"    "Chores"
+            print_section "build"    "Build"
+            print_section "ci"       "CI"
+            if [ ! -s /tmp/CHANGELOG.md ]; then
+              echo "No conventional commits in range — see commit history below."
+              echo ""
+              git log --pretty=format:"- %s" "$RANGE" | head -20
+            fi
           } > /tmp/CHANGELOG.md
           cat /tmp/CHANGELOG.md
 
