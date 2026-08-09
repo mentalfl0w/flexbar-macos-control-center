@@ -13,8 +13,10 @@ let lastIostatSample = null;
  * @returns {Promise<{usedGB:number,totalGB:number,percent:number,tps:number,mbps:number}|null>}
  */
 async function collect() {
-  // Disk space from df -k /
-  const dfOut = await run('df -k /');
+  // Disk space from df -k /System/Volumes/Data — the data volume holds real
+  // user data; 'df -k /' only shows the small system volume (~12G) and would
+  // misreport usage on macOS.
+  const dfOut = await run('df -k /System/Volumes/Data') || await run('df -k /');
   if (!dfOut) {
     return null;
   }

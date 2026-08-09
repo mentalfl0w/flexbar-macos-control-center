@@ -36,6 +36,13 @@ const BUTTONS = {
   darkmode:   'Dark', wifi: 'WiFi', stage: 'Stage'
 };
 
+// Usage-bar color semantics: LOW = green, MID = yellow, HIGH = red
+function usageColor(percent) {
+  if (percent >= 80) return '#FF453A';
+  if (percent >= 50) return '#FF9F0A';
+  return '#30D158';
+}
+
 function fmtRate(bps) {
   if (bps >= 1048576) return (bps / 1048576).toFixed(1) + 'M';
   if (bps >= 1024) return (bps / 1024).toFixed(0) + 'K';
@@ -86,7 +93,7 @@ function drawData(ctx, x, w, id, d) {
       break;
     }
     case 'mem': {
-      drawBar(ctx, x + 10, 26, w - 20, 10, d.mem, GREEN);
+      drawBar(ctx, x + 10, 26, w - 20, 10, d.mem, usageColor(d.mem));
       ctx.fillStyle = TEXT;
       ctx.font = '700 14px "SF Mono", Menlo, monospace';
       ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
@@ -97,7 +104,7 @@ function drawData(ctx, x, w, id, d) {
       break;
     }
     case 'disk': {
-      drawBar(ctx, x + 10, 26, w - 20, 10, d.disk, d.disk > 90 ? RED : ORANGE);
+      drawBar(ctx, x + 10, 26, w - 20, 10, d.disk, usageColor(d.disk));
       ctx.fillStyle = TEXT;
       ctx.font = '700 14px "SF Mono", Menlo, monospace';
       ctx.textAlign = 'left'; ctx.textBaseline = 'middle';

@@ -16,6 +16,20 @@ const TEXT = '#FFFFFF';
  * @param {number} bps
  * @returns {string}
  */
+// Usage-bar color semantics: LOW = green, MID = yellow, HIGH = red
+function usageColor(percent) {
+  if (percent >= 80) return '#FF453A'; // red — high usage
+  if (percent >= 50) return '#FF9F0A'; // yellow — medium usage
+  return '#30D158';                    // green — low usage
+}
+
+// Battery (remaining charge) semantics: LOW = red, MID = yellow, HIGH = green
+function batteryColor(percent) {
+  if (percent <= 20) return '#FF453A';
+  if (percent <= 50) return '#FF9F0A';
+  return '#30D158';
+}
+
 function fmtRate(bps) {
   if (bps < 1024) return `${bps}B/s`;
   if (bps < 1024 * 1024) return `${(bps / 1024).toFixed(1)}K/s`;
@@ -58,7 +72,7 @@ function renderOverview(data, width = 600) {
   let x = startX;
 
   // --- Memory bar ---
-  drawBar(ctx, x, 12, blockW, 12, data.mem || 0, GREEN);
+  drawBar(ctx, x, 12, blockW, 12, data.mem || 0, usageColor(data.mem || 0));
   ctx.fillStyle = GRAY;
   ctx.font = '9px -apple-system, "SF Pro Text", sans-serif';
   ctx.textAlign = 'left';
@@ -89,7 +103,7 @@ function renderOverview(data, width = 600) {
     // No battery on this device (desktop) → stretch disk to fill the freed POWER space
     const hasBattery = data.batteryPercent !== undefined;
     const diskW = hasBattery ? blockW : Math.min(width - x - 14, blockW + 170);
-    drawBar(ctx, x, 12, diskW, 12, data.disk || 0, RED);
+    drawBar(ctx, x, 12, diskW, 12, data.disk || 0, usageColor(data.disk || 0));
     ctx.fillStyle = GRAY;
     ctx.font = '9px -apple-system, "SF Pro Text", sans-serif';
     ctx.textAlign = 'left';
@@ -110,7 +124,7 @@ function renderOverview(data, width = 600) {
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
       ctx.fillText('POWER', x, 15);
-      const battColor = data.batteryPercent < 20 ? RED : GREEN;
+      const battColor = batteryColor(data.batteryPercent);
       ctx.fillStyle = battColor;
       ctx.font = 'bold 11px "SF Mono", Menlo, monospace';
       const battText = data.charging ? `⚡${data.batteryPercent}%` : `${data.batteryPercent}%`;
