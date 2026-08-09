@@ -17,17 +17,18 @@ const TEXT = '#FFFFFF';
 
 // Buttons are wide with horizontal (label left, state right) layout;
 // data blocks compact. Total = 2140 ≤ 2170.
+// Widths: total = 2160 ≤ 2170 so all 10 modules fit (stage was truncated before)
 const MODULES = {
-  cpu:        { width: 230, type: 'data' },
-  mem:        { width: 230, type: 'data' },
-  disk:       { width: 230, type: 'data' },
-  net:        { width: 280, type: 'data' },
-  sleep:      { width: 220, type: 'button' },
-  lock:       { width: 220, type: 'button' },
-  caffeinate: { width: 240, type: 'button' },
-  darkmode:   { width: 240, type: 'button' },
-  wifi:       { width: 220, type: 'button' },
-  stage:      { width: 230, type: 'button' }
+  cpu:        { width: 200, type: 'data' },
+  mem:        { width: 200, type: 'data' },
+  disk:       { width: 200, type: 'data' },
+  net:        { width: 250, type: 'data' },
+  sleep:      { width: 210, type: 'button' },
+  lock:       { width: 210, type: 'button' },
+  caffeinate: { width: 230, type: 'button' },
+  darkmode:   { width: 230, type: 'button' },
+  wifi:       { width: 210, type: 'button' },
+  stage:      { width: 220, type: 'button' }
 };
 const TOTAL = Object.values(MODULES).reduce((s, m) => s + m.width, 0); // 2300 → trim later
 

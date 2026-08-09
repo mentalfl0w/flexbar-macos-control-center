@@ -589,24 +589,26 @@ class MacControlPlugin {
   // Screenshot handler
   // ============================================================
   handleScreenshot(sn, data) {
-    // Long press: full screenshot to Desktop
-    // Short press: interactive area screenshot to clipboard
-    const isLongPress = data && (data.pressDuration >= (this.config.safeLongPress || 3000)
-                          || (data.holdTime && data.holdTime >= (this.config.safeLongPress || 3000)));
-
-    if (isLongPress) {
-      this.snackbar(sn, 'Capturing full screen...', 'info');
-      shortcuts.fullScreenshot().then((ok) => {
-        this.snackbar(sn, ok ? 'Saved to Desktop' : 'Screenshot failed', ok ? 'success' : 'error');
-      }).catch(() => {});
-    } else {
-      this.snackbar(sn, 'Select area to capture', 'info');
+    // NOTE: FlexDesigner only sends evt:'click' — pressDuration/holdTime do not
+    // exist in the payload, so long-press detection was dead code. Use the
+    // double-tap pattern instead: first tap = interactive area capture to
+    // clipboard, second tap within 10s = full screen to Desktop.
+    const now = Date.now();
+    const armed = this.pressTracker[sn + ':screenshot'];
+    if (!armed || (now - armed.startTime) > 10000) {
+      this.pressTracker[sn + ':screenshot'] = { startTime: now };
+      this.snackbar(sn, 'Select area to capture — tap again for full screen', 'info');
       shortcuts.screenshot().then((ok) => {
         this.snackbar(sn, ok ? 'Copied to clipboard' : 'Screenshot failed', ok ? 'success' : 'error');
       }).catch(() => {});
+      return { status: 'success', message: 'Area capture' };
     }
-
-    return { status: 'success', message: 'Screenshot triggered' };
+    delete this.pressTracker[sn + ':screenshot'];
+    this.snackbar(sn, 'Capturing full screen...', 'info');
+    shortcuts.fullScreenshot().then((ok) => {
+      this.snackbar(sn, ok ? 'Saved to Desktop' : 'Screenshot failed', ok ? 'success' : 'error');
+    }).catch(() => {});
+    return { status: 'success', message: 'Full capture' };
   }
 
   // ============================================================
