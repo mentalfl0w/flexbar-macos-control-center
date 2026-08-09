@@ -8,9 +8,11 @@ const { run } = require('../collectors/exec');
  * @returns {Promise<boolean>}
  */
 async function toggleDarkMode() {
+  // Correct syntax: System Events exposes dark mode under `appearance preferences`.
+  // The bare `set dark mode to not dark mode` form throws -1700 (can't convert theme to boolean).
   return new Promise((resolve) => {
     exec(
-      "osascript -e 'tell app \"System Events\" to set dark mode to not dark mode'",
+      "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'",
       (err) => resolve(!err)
     );
   });

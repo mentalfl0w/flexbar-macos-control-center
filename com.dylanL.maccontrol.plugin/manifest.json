@@ -1,7 +1,7 @@
 {
   "name": "macOS Control Center",
   "uuid": "com.dylanL.maccontrol",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Dylan Liu",
   "entry": "backend/plugin.cjs",
   "description": "Mac system monitoring and control center for Flexbar",

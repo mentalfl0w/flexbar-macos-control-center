@@ -32,7 +32,19 @@ async function sleepNow() {
  * @returns {Promise<boolean>}
  */
 async function lockScreen() {
-  return runCmd('pmset displaysleepnow');
+  // Real lock screen: Ctrl+Cmd+Q (key code 12). pmset displaysleepnow only blanks
+  // the display and doesn't lock unless "require password" is set.
+  // Fall back to display sleep if the keystroke is blocked (Accessibility TCC).
+  return new Promise((resolve) => {
+    execFile('osascript', ['-e', 'tell application "System Events" to key code 12 using {control down, command down}'],
+      { timeout: 5000 }, (err) => {
+        if (err) {
+          runCmd('pmset displaysleepnow').then(resolve).catch(() => resolve(false));
+        } else {
+          resolve(true);
+        }
+      });
+  });
 }
 
 /**
