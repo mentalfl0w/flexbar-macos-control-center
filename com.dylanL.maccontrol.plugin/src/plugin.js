@@ -48,7 +48,7 @@ class MacControlPlugin {
     this.keyData = {};        // uid -> key object
     this.serialNumber = null;
     this.config = {
-      refreshInterval: 2000,
+      refreshInterval: 5000,
       theme: 'dark',
       safeLongPress: 3000
     };
@@ -334,21 +334,28 @@ class MacControlPlugin {
   // ============================================================
   startTimers() {
     this.stopTimers();
-    const interval = this.config.refreshInterval || 2000;
+    const interval = this.config.refreshInterval || 5000;
 
-    this.monitorTimer = setInterval(() => {
+    // Chart data every `interval` (5s default). First fire offset +1s so it
+    // doesn't align with overview's first redraw.
+    this.monitorTimer = setTimeout(() => {
       this.collectAndSend().catch(() => {});
-    }, interval);
+      this.monitorTimer = setInterval(() => this.collectAndSend().catch(() => {}), interval);
+    }, 1000);
 
-    // Overview redraws every 10s — full redraws flicker on device if too frequent
-    this.overviewTimer = setInterval(() => {
+    // Overview redraws every 10s — full redraws flicker if too frequent.
+    // Offset +3s so the three timers never align on the same tick.
+    this.overviewTimer = setTimeout(() => {
       this.updateOverview().catch(() => {});
-    }, Math.max(interval * 2, 10000));
+      this.overviewTimer = setInterval(() => this.updateOverview().catch(() => {}), Math.max(interval * 2, 10000));
+    }, 3000);
 
-    // SystemInfo updates every 30s
-    this.systemInfoTimer = setInterval(() => {
+    // SystemInfo redraws every 60s (was 30s) — it is a full-key redraw and
+    // users observed flicker. Offset +5s.
+    this.systemInfoTimer = setTimeout(() => {
       this.updateSystemInfo().catch(() => {});
-    }, 30000);
+      this.systemInfoTimer = setInterval(() => this.updateSystemInfo().catch(() => {}), 60000);
+    }, 5000);
   }
 
   stopTimers() {
