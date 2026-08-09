@@ -1,7 +1,7 @@
 {
   "name": "macOS Control Center",
   "uuid": "com.dylanL.maccontrol",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Dylan Liu",
   "entry": "backend/plugin.cjs",
   "description": "Mac system monitoring and control center for Flexbar",
@@ -504,7 +504,7 @@
                 },
                 "style": {
                   "icon": "mdi mdi-information-outline",
-                  "width": 480,
+                  "width": 240,
                   "bgColor": "#1C1C1E",
                   "fgColor": "#ffffff",
                   "fontSize": 12

@@ -40,7 +40,7 @@ function fmtMem(bytes) {
  * @param {number} width - canvas width (default 480)
  * @returns {Promise<string>} data:image/png;base64,... data URL
  */
-async function renderSystemInfo(info, width = 480) {
+async function renderSystemInfo(info, width = 240) {
   const canvas = createCanvas(width, 60);
   const ctx = canvas.getContext('2d');
 
