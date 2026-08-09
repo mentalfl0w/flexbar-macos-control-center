@@ -1,7 +1,7 @@
 {
   "name": "macOS Control Center",
   "uuid": "com.dylanL.maccontrol",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Dylan Liu",
   "entry": "backend/plugin.cjs",
   "description": "Mac system monitoring and control center for Flexbar",
@@ -315,7 +315,7 @@
                 "tip": "$DarkMode.Tip",
                 "cid": "com.dylanL.maccontrol.darkmode",
                 "config": {
-                  "keyType": "multiState",
+                  "keyType": "default",
                   "platform": [
                     "mac"
                   ]
@@ -325,39 +325,16 @@
                   "width": 240,
                   "bgColor": "#1C1C1E",
                   "fgColor": "#ffffff",
-                  "fontSize": 12,
-                  "multiStyle": [
-                    {
-                      "icon": "mdi mdi-weather-sunny",
-                      "iconSize": 30,
-                      "showTitle": false,
-                      "bgColor": "#2C2C2E",
-                      "fgColor": "#8E8E93",
-                      "borderStyle": "none"
-                    },
-                    {
-                      "icon": "mdi mdi-weather-night",
-                      "iconSize": 30,
-                      "showTitle": false,
-                      "bgColor": "#0A84FF",
-                      "fgColor": "#FFFFFF",
-                      "borderStyle": "none"
-                    }
-                  ]
+                  "fontSize": 12
                 },
-                "data": {
-                  "states": [
-                    "Off",
-                    "On"
-                  ]
-                }
+                "data": {}
               },
               {
                 "title": "$WiFi.Title",
                 "tip": "$WiFi.Tip",
                 "cid": "com.dylanL.maccontrol.wifi",
                 "config": {
-                  "keyType": "multiState",
+                  "keyType": "default",
                   "platform": [
                     "mac"
                   ]
@@ -367,39 +344,16 @@
                   "width": 240,
                   "bgColor": "#1C1C1E",
                   "fgColor": "#ffffff",
-                  "fontSize": 12,
-                  "multiStyle": [
-                    {
-                      "icon": "mdi mdi-wifi-off",
-                      "iconSize": 30,
-                      "showTitle": false,
-                      "bgColor": "#2C2C2E",
-                      "fgColor": "#8E8E93",
-                      "borderStyle": "none"
-                    },
-                    {
-                      "icon": "mdi mdi-wifi",
-                      "iconSize": 30,
-                      "showTitle": false,
-                      "bgColor": "#0A84FF",
-                      "fgColor": "#FFFFFF",
-                      "borderStyle": "none"
-                    }
-                  ]
+                  "fontSize": 12
                 },
-                "data": {
-                  "states": [
-                    "Off",
-                    "On"
-                  ]
-                }
+                "data": {}
               },
               {
                 "title": "$Stage.Title",
                 "tip": "$Stage.Tip",
                 "cid": "com.dylanL.maccontrol.stage",
                 "config": {
-                  "keyType": "multiState",
+                  "keyType": "default",
                   "platform": [
                     "mac"
                   ]
@@ -409,32 +363,9 @@
                   "width": 240,
                   "bgColor": "#1C1C1E",
                   "fgColor": "#ffffff",
-                  "fontSize": 12,
-                  "multiStyle": [
-                    {
-                      "icon": "mdi mdi-view-parallel-outline",
-                      "iconSize": 30,
-                      "showTitle": false,
-                      "bgColor": "#2C2C2E",
-                      "fgColor": "#8E8E93",
-                      "borderStyle": "none"
-                    },
-                    {
-                      "icon": "mdi mdi-view-parallel",
-                      "iconSize": 30,
-                      "showTitle": false,
-                      "bgColor": "#0A84FF",
-                      "fgColor": "#FFFFFF",
-                      "borderStyle": "none"
-                    }
-                  ]
+                  "fontSize": 12
                 },
-                "data": {
-                  "states": [
-                    "Off",
-                    "On"
-                  ]
-                }
+                "data": {}
               }
             ]
           },

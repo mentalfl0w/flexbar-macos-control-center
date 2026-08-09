@@ -297,6 +297,45 @@ class MacControlPlugin {
     return this.coffeeIconPromise;
   }
 
+  async renderToggleButton(sn, key, type) {
+    try {
+      // Reconnect/realive changes key.uid — always use the latest key object
+      const live = Object.values(this.keyData).find((k) => k.cid === key.cid && k.serialNumber === sn);
+      if (live) key = live;
+      let on = false;
+      try {
+        if (type === 'darkmode') on = await toggles.getDarkMode();
+        else if (type === 'wifi') on = await toggles.getWifiState();
+        else if (type === 'stage') on = await toggles.getStageManager();
+      } catch (e) { /* keep false */ }
+
+      const w = key.width || 240;
+      const canvas = createCanvas(w, 60);
+      const ctx = canvas.getContext('2d');
+      // Rounded background (native key look)
+      ctx.beginPath();
+      ctx.moveTo(5, 3);
+      ctx.arcTo(w - 3, 3, w - 3, 57, 10);
+      ctx.arcTo(w - 3, 57, 5, 57, 10);
+      ctx.arcTo(5, 57, 5, 3, 10);
+      ctx.arcTo(5, 3, w - 3, 3, 10);
+      ctx.closePath();
+      ctx.fillStyle = on ? '#0A84FF' : '#1C1C1E';
+      ctx.fill();
+
+      await loadToggleIcons();
+      const imgs = toggleImgCache[type];
+      const icon = imgs ? (on ? imgs.on : imgs.off) : null;
+      if (icon) {
+        const iconSize = 56;
+        ctx.drawImage(icon, (w - iconSize) / 2, (60 - iconSize) / 2, iconSize, iconSize);
+      }
+      this.queued(() => plugin.draw(sn, key, 'base64', canvas.toDataURL('image/png')));
+    } catch (e) {
+      logger.debug('Toggle render error (' + type + '): ' + e.message);
+    }
+  }
+
   async renderCaffeinateButton(sn, key) {
     try {
       // Reconnect/realive changes key.uid — always use the latest key object
@@ -368,27 +407,8 @@ class MacControlPlugin {
   // Init multistate keys based on current system state
   // ============================================================
   async initMultistateKey(sn, key) {
-    try {
-      switch (key.cid) {
-        case 'com.dylanL.maccontrol.darkmode': {
-          const isDark = await toggles.getDarkMode();
-          this.safeSetMultiState(sn, key, isDark ? 1 : 0, isDark ? 'Dark' : 'Light');
-          break;
-        }
-        case 'com.dylanL.maccontrol.wifi': {
-          const isOn = await toggles.getWifiState();
-          this.safeSetMultiState(sn, key, isOn ? 1 : 0, isOn ? 'On' : 'Off');
-          break;
-        }
-        case 'com.dylanL.maccontrol.stage': {
-          const isOn = await toggles.getStageManager();
-          this.safeSetMultiState(sn, key, isOn ? 1 : 0, isOn ? 'On' : 'Off');
-          break;
-        }
-      }
-    } catch (e) {
-      logger.debug(`Init multistate ${key.cid} error:`, e.message);
-    }
+    // No multiState keys remain in the manifest — all toggles are self-drawn.
+    // Kept as a no-op guard for legacy configs carrying multiState keyType.
   }
 
   // ============================================================
@@ -569,7 +589,9 @@ class MacControlPlugin {
       }
 
       if (success) {
-        this.safeSetMultiState(sn, key, newState ? 1 : 0, newState ? 'On' : 'Off');
+        // Self-drawn visual — native multiState set() is accepted by the server
+        // but not pushed to the device (observed on caffeinate), so draw instead.
+        this.renderToggleButton(sn, key, type).catch(() => {});
         const labels = { darkmode: 'Dark Mode', wifi: 'WiFi', stage: 'Stage Manager' };
         this.snackbar(sn, `${labels[type]} ${newState ? 'ON' : 'OFF'}`, 'success');
       } else {
